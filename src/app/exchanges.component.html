@@ -1,0 +1,14 @@
+  <h2>Stock Exchanges</h2>
+  <ul class="exchanges">
+    <li *ngFor="let exchange of exchanges"
+      (click)="onSelect(exchange)"
+      [class.selected]="exchange === selectedExchange">
+      <span class="badge">{{exchange.id}}</span> {{exchange.name}}
+    </li>
+  </ul>
+  <div *ngIf="selectedExchange">
+    <h2>
+      {{selectedExchange.name | uppercase}}
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+  </div>
