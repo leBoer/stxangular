@@ -8,15 +8,15 @@ import { EXCHANGES } from './mock-exchanges';
 
 @Injectable()
 export class ExchangeService {
-  // private exchangesUrl = 'http://127.0.0.1:8000/stxclock/api/exchanges/?format=json';
-  private exchangesUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private exchangesUrl = 'http://127.0.0.1:8000/stxclock/api/exchanges/?format=json';
+  // private exchangesUrl = 'https://jsonplaceholder.typicode.com/posts';
 
   constructor(private http: Http) {}
 
   getExchanges(): Promise<Exchange[]> {
     return this.http.get(this.exchangesUrl)
       .toPromise()
-      .then(response => response.json().data as Exchange[])
+      .then(response => response.json().results as Exchange[])
       .catch(this.handleError);
   }
 

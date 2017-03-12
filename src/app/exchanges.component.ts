@@ -28,9 +28,6 @@ export class ExchangesComponent implements OnInit {
 
   getExchanges(): void {
     this.exchangeService.getExchanges().then(exchanges => this.exchanges = exchanges);
-    setTimeout(function() {
-      console.log(this.exchanges);
-    }, 5000);
   }
 
   gotoDetail(): void {
