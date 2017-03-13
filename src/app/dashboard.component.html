@@ -4,6 +4,10 @@
   <a *ngFor="let exchange of exchanges" [routerLink]="['/detail', exchange.id]" class="col-1-4">
     <div class="module exchange">
       <h4>{{exchange.name}}</h4>
+      <span>Current time: {{exchange.time}}</span>
+      <span *ngIf="exchange.open_status == true">Open</span>
+      <span *ngIf="exchange.open_status == false">Closed</span>
+      <!-- <p>{{myDate | amTimezone:'Israel' | amDateFormat: 'HH:mm:ss'}}</p> -->
     </div>
   </a>
 </div>
