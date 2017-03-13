@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Attribute } from '@angular/core';
 
 import { Exchange } from './exchange';
 import { ExchangeService } from './exchange.service';
@@ -11,11 +11,20 @@ import { ExchangeService } from './exchange.service';
 })
 export class DashboardComponent implements OnInit {
   exchanges: Exchange[] = [];
+  myDate: Date;
 
   constructor(private exchangeService: ExchangeService) {}
 
   ngOnInit(): void {
     this.exchangeService.getExchanges()
       .then(exchanges => this.exchanges = exchanges);
+
+    this.utcTime();
+  }
+
+  utcTime(): void {
+    setInterval(() => {
+      this.myDate = new Date();
+    }, 1000);
   }
 }

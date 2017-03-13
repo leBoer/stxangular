@@ -33,4 +33,5 @@ export class ExchangesComponent implements OnInit {
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedExchange.id]);
   }
+
 }

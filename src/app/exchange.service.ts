@@ -29,4 +29,6 @@ export class ExchangeService {
     return this.getExchanges()
       .then(exchanges => exchanges.find(exchange => exchange.id === id));
   }
+
 }
+
