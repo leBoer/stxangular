@@ -8,4 +8,5 @@ export class Exchange {
   opening_time: number;
   closing_time: number;
   open_status: boolean;
+  remaining: string;
 }

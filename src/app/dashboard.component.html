@@ -2,12 +2,16 @@
 <p>{{ myDate | amUtc | amDateFormat: 'ddd Do HH:mm:ss' }}</p>
 <div class="grid grid-pad">
   <a *ngFor="let exchange of exchanges" [routerLink]="['/detail', exchange.id]" class="col-1-4">
-    <div class="module exchange">
+    <div class="exchange" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
+      <h3 *ngIf="exchange.open_status == true">OPEN</h3>
+      <h3 *ngIf="exchange.open_status == false">CLOSED</h3>
       <h4>{{exchange.name}}</h4>
-      <span>Current time: {{exchange.time}}</span>
-      <span *ngIf="exchange.open_status == true">Open</span>
-      <span *ngIf="exchange.open_status == false">Closed</span>
+      <span>Current time:<br>{{exchange.time}}</span>
+      <hr>
+      <span *ngIf="exchange.open_status == true">Closing in: {{exchange.remaining}}</span>
+      <span *ngIf="exchange.open_status == false">Opening in: {{exchange.remaining}}</span>
       <!-- <p>{{myDate | amTimezone:'Israel' | amDateFormat: 'HH:mm:ss'}}</p> -->
     </div>
   </a>
 </div>
+<button (click)="buttonTest()">TestButton</button>

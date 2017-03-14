@@ -34,26 +34,44 @@ export class DashboardComponent implements OnInit {
     setInterval(() => {
       this.myDate = new Date();
       var format = 'hh:mm:ss';
-      // console.log(this.exchanges[1].timezone); // for testing purposes
-      // this.nonUTCTime(this.exchanges[1].timezone);
+
       for (var i = 0; i < this.exchanges.length; i++) {
-        this.exchanges[i].time = this.nonUTCTime(this.exchanges[i].timezone).format("ddd HH:mm:ss");
-        this.exchanges[i].day = this.nonUTCTime(this.exchanges[i].timezone).format("dddd");
-        var time = moment(this.exchanges[i].time, format),
-          beforeTime = moment(this.exchanges[i].opening_time, format),
-          afterTime = moment(this.exchanges[i].closing_time, format);
+        var exchange = this.exchanges[i];
+        exchange.time = this.nonUTCTime(exchange.timezone).format("ddd HH:mm:ss");
+        exchange.day = this.nonUTCTime(exchange.timezone).format("dddd");
+        var time = moment(exchange.time, format),
+          beforeTime = moment(exchange.opening_time, format),
+          afterTime = moment(exchange.closing_time, format),
+          beforeDiff = beforeTime.diff(time),
+          afterDiff = afterTime.diff(time),
+          beforeDur = moment.duration(beforeDiff),
+          afterDur = moment.duration(afterDiff),
+          afterRemaining = Math.floor(afterDur.asHours()) + moment.utc(afterDur.asMilliseconds()).format(":mm:ss"),
+          beforeRemaining = Math.floor(beforeDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
+        // Checks if the exchange is open or closed
         if (time.isBetween(beforeTime, afterTime)) {
-          this.exchanges[i].open_status = true;
+          exchange.open_status = true;
+          exchange.remaining = afterRemaining;
         } else {
-          this.exchanges[i].open_status = false;
+          exchange.open_status = false;
+          if (beforeDiff > 0) { // If the exchange is closed, but opens today
+            exchange.remaining = beforeRemaining;
+          } else {
+            // Taking into account for opening times that are tomorrow
+            beforeTime = beforeTime.add(1, 'd');
+            beforeDiff = beforeTime.diff(time);
+            beforeDur = moment.duration(beforeDiff);
+            beforeRemaining = Math.floor(beforeDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
+            exchange.remaining = beforeRemaining;
+          }
         }
-        // if (this.exchanges[i].closing_time > this.nonUTCTime(this.exchanges[i].timezone) > this.exchanges[i].opening_time) {
-        //   console.log('Open!!');
-        // } else {
-        //   console.log('Closed!!');
-        // }
+
       }
     }, 1000);
+  }
+
+  buttonTest(): void {
+    console.log(this.exchanges[4].day);
   }
 
 }
