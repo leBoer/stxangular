@@ -13,6 +13,7 @@ export class ClockService {
 
     utcTime(exchanges): any {
         this.exchangeTimes(exchanges);
+        this.exchangeOpenStatus(exchanges);
         return this.myDate = new Date;
     }
 
@@ -23,10 +24,25 @@ export class ClockService {
 
     exchangeTimes(exchanges): any {
         for (var i = 0; i < exchanges.length; i++) {
-            console.log('exchanges are running');
-            var exchange = exchanges[i];
+            var exchange = exchanges[i]; // Sets a variable for easier access to individual exchanges
             exchange.time = this.nonUTCTime(exchange.timezone).format("ddd HH:mm:ss");
             exchange.day = this.nonUTCTime(exchange.timezone).format("dddd");
+        }
+    }
+
+    exchangeOpenStatus(exchanges): any {
+        var format = 'hh:mm:ss';
+        for (var i = 0; i < exchanges.length; i++) {
+            var exchange = exchanges[i]; // Sets a variable for easier access to individual exchanges
+            var time = moment(exchange.time, format),
+                beforeTime = moment(exchange.opening_time, format),
+                afterTime = moment(exchange.closing_time, format);
+            if (time.isBetween(beforeTime, afterTime)) {
+                exchange.open_status = true;
+            } else {
+                exchange.open_status = false;
+            }
+                    
         }
     }
 }
