@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ExchangeDetailComponent } from './exchange-detail.component';
 import { ExchangesComponent } from './exchanges.component';
 import { ExchangeService } from './exchange.service';
+import { ClockService } from './clock.service';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -26,7 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     MomentModule
   ],
-  providers: [ExchangeService],
+  providers: [ExchangeService, ClockService],
   bootstrap: [AppComponent]
 })
 
