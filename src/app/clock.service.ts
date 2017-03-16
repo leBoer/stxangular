@@ -12,6 +12,11 @@ export class ClockService {
 
     constructor(private exchangeService: ExchangeService) { }
 
+    fetchExchanges(): void {
+        this.exchangeService.getExchanges()
+            .then(exchanges => this.exchanges = exchanges);
+    }
+
     utcTime(exchanges): any {
         this.exchangeTimes(exchanges);
         this.exchangeOpenStatus(exchanges);
@@ -51,7 +56,7 @@ export class ClockService {
         var format = 'hh:mm:ss';
         for (var i = 0; i < exchanges.length; i++) {
             var exchange = exchanges[i]; // For easier access to individual exchanges
-            var time = moment(exchange.time),
+            var time = moment(exchange.time, format),
                 beforeTime = moment(exchange.opening_time, format),
                 afterTime = moment(exchange.closing_time, format),
                 beforeDiff = beforeTime.diff(time),
@@ -60,16 +65,23 @@ export class ClockService {
                 afterDur = moment.duration(afterDiff),
                 afterRemaining = Math.floor(afterDur.asHours()) + moment.utc(afterDur.asMilliseconds()).format(":mm:ss"),
                 beforeRemaining = Math.floor(afterDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
-                console.log(exchange.day);
             if (exchange.open_status == true) {
                 exchange.remaining = afterRemaining;
             } else {
-                exchange.remaining = beforeRemaining;
+                if (beforeDiff > 0) {
+                    exchange.remaining = beforeRemaining;
+                } else {
+                    beforeTime = beforeTime.add(1, 'd');
+                    beforeDiff = beforeTime.diff(time);
+                    beforeDur = moment.duration(beforeDiff);
+                    beforeRemaining = Math.floor(afterDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
+                    exchange.remaining = beforeRemaining;
+                }
             }
         }
     }
 
-    testingfunction(exchanges): void {
-        console.log(exchanges);
+    testingfunction(): void {
+        console.log(this.exchanges);
     }
 }

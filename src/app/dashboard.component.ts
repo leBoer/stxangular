@@ -28,11 +28,11 @@ export class DashboardComponent implements OnInit {
       this.myDate = this.clockService.utcTime(this.exchanges);
     }, 1000);
 
-    // this.nonUTCTime(this.exchanges[1].timezone);
+    this.clockService.fetchExchanges();
   }
 
-  buttonTest(exchanges): any {
-    this.clockService.testingfunction(exchanges);
+  buttonTest(): any {
+    this.clockService.testingfunction();
   }
 
   // nonUTCTime(timezone): any {
