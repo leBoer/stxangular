@@ -31,6 +31,10 @@ export class DashboardComponent implements OnInit {
     // this.nonUTCTime(this.exchanges[1].timezone);
   }
 
+  buttonTest(exchanges): any {
+    this.clockService.testingfunction(exchanges);
+  }
+
   // nonUTCTime(timezone): any {
   //   var local_time = moment().tz(timezone);
   //   return local_time;
@@ -76,8 +80,5 @@ export class DashboardComponent implements OnInit {
   //   }, 1000);
   // }
 
-  buttonTest(): void {
-    console.log(this.exchanges[4].day);
-  }
 
 }

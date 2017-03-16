@@ -3,17 +3,19 @@ import { MomentModule } from 'angular2-moment';
 import * as moment from 'moment-timezone';
 
 import { Exchange } from './exchange';
+import { ExchangeService } from './exchange.service';
 
 @Injectable()
 export class ClockService {
     myDate: Date;
     exchanges: Exchange[] =[];
 
-    constructor() { }
+    constructor(private exchangeService: ExchangeService) { }
 
     utcTime(exchanges): any {
         this.exchangeTimes(exchanges);
         this.exchangeOpenStatus(exchanges);
+        this.exchangeRemaining(exchanges);
         return this.myDate = new Date;
     }
 
@@ -42,7 +44,32 @@ export class ClockService {
             } else {
                 exchange.open_status = false;
             }
-                    
         }
+    }
+
+    exchangeRemaining(exchanges): any {
+        var format = 'hh:mm:ss';
+        for (var i = 0; i < exchanges.length; i++) {
+            var exchange = exchanges[i]; // For easier access to individual exchanges
+            var time = moment(exchange.time),
+                beforeTime = moment(exchange.opening_time, format),
+                afterTime = moment(exchange.closing_time, format),
+                beforeDiff = beforeTime.diff(time),
+                afterDiff = afterTime.diff(time),
+                beforeDur = moment.duration(beforeDiff),
+                afterDur = moment.duration(afterDiff),
+                afterRemaining = Math.floor(afterDur.asHours()) + moment.utc(afterDur.asMilliseconds()).format(":mm:ss"),
+                beforeRemaining = Math.floor(afterDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
+                console.log(exchange.day);
+            if (exchange.open_status == true) {
+                exchange.remaining = afterRemaining;
+            } else {
+                exchange.remaining = beforeRemaining;
+            }
+        }
+    }
+
+    testingfunction(exchanges): void {
+        console.log(exchanges);
     }
 }
