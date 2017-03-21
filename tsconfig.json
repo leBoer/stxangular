@@ -9,8 +9,9 @@
     "experimentalDecorators": true,
     "target": "es5",
     "lib": [
-      "es2016",
-      "dom"
+      "es6",
+      "dom",
+      "es2015.iterable"
     ]
   }
 }

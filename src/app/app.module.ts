@@ -17,8 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     DashboardComponent,
-    ExchangesComponent,
-    ExchangeDetailComponent
+    ExchangeDetailComponent,
+    ExchangesComponent
   ],
   imports: [
     BrowserModule,

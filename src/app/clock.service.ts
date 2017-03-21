@@ -21,7 +21,7 @@ export class ClockService {
         this.exchangeTimes(exchanges);
         this.exchangeOpenStatus(exchanges);
         this.exchangeRemaining(exchanges);
-        return this.myDate = new Date;
+        return [this.myDate = new Date, this.exchanges];
     }
 
     nonUTCTime(timezone): any {
@@ -44,7 +44,7 @@ export class ClockService {
             var time = moment(exchange.time, format),
                 beforeTime = moment(exchange.opening_time, format),
                 afterTime = moment(exchange.closing_time, format);
-            if (time.isBetween(beforeTime, afterTime)) {
+            if (!this.checkWeekend(i) && time.isBetween(beforeTime, afterTime)) {
                 exchange.open_status = true;
             } else {
                 exchange.open_status = false;
@@ -66,22 +66,46 @@ export class ClockService {
                 afterRemaining = Math.floor(afterDur.asHours()) + moment.utc(afterDur.asMilliseconds()).format(":mm:ss"),
                 beforeRemaining = Math.floor(afterDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
             if (exchange.open_status == true) {
-                exchange.remaining = afterRemaining;
+                this.exchanges[i].remaining = afterRemaining;
             } else {
                 if (beforeDiff > 0) {
-                    exchange.remaining = beforeRemaining;
+                    this.exchanges[i].remaining = beforeRemaining;
                 } else {
                     beforeTime = beforeTime.add(1, 'd');
                     beforeDiff = beforeTime.diff(time);
                     beforeDur = moment.duration(beforeDiff);
-                    beforeRemaining = Math.floor(afterDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
-                    exchange.remaining = beforeRemaining;
+                    beforeRemaining = Math.floor(beforeDur.asHours()) + moment.utc(beforeDur.asMilliseconds()).format(":mm:ss");
+                    this.exchanges[i].remaining = beforeRemaining;
                 }
             }
         }
     }
 
+    // thoughtFunction(i): any {
+    //     if ("it is after closing time" && "it is the day before the first weekend day") {
+    //         exchangeRemaining(i, beforeTime = beforeTime.add(2, 'd'));
+    //     } else if ("")
+    // }
+
+
+
+    checkWeekend(i): any {
+        if (this.exchanges[i].weekend[0] == this.exchanges[i].day) {
+            this.exchanges[i].extra_days = 2;
+            return true;
+        } else if (this.exchanges[i].weekend[1] == this.exchanges[i].day) {
+            this.exchanges[i].extra_days = 1;
+            return true;
+        } else {
+            this.exchanges[i].extra_days = 0;
+        }
+    }
+
     testingfunction(): void {
-        console.log(this.exchanges);
+        for (var i = 0; i < this.exchanges.length; i++) {
+           console.log(this.exchanges);
+           console.log(this.exchanges[i].extra_days);
+
+        }
     }
 }

@@ -1,5 +1,5 @@
 <h3>Top Exchanges</h3>
-<p>{{ myDate | amUtc | amDateFormat: 'ddd Do HH:mm:ss' }}</p>
+<h4 class="utcClock">{{ myDate | amUtc | amDateFormat: 'ddd Do HH:mm:ss' }}</h4>
 <div class="grid grid-pad">
   <a *ngFor="let exchange of exchanges" [routerLink]="['/detail', exchange.id]" class="col-1-4">
     <div class="exchange" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
