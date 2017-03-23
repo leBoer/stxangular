@@ -20,9 +20,8 @@ export class ClockService {
     utcTime(exchanges): any {
         this.exchangeTimes(exchanges);
         this.exchangeOpenStatus(exchanges);
-        // this.exchangeRemaining(exchanges);
         for (var i = 0; i < exchanges.length; i++) {
-            this.exchanges[i].remaining = this.exchangeRemaining2(i);
+            this.exchanges[i].remaining = this.exchangeRemaining(i);
         }
         return [this.myDate = new Date, this.exchanges];
     }
@@ -54,35 +53,6 @@ export class ClockService {
             }
         }
     }
-
-    // exchangeRemaining(exchanges): any {
-    //     var format = 'hh:mm:ss';
-    //     for (var i = 0; i < exchanges.length; i++) {
-    //         var exchange = this.exchanges[i]; // For easier access to individual exchanges
-    //         this.exchanges[i].timeobject = moment(exchange.time, format);
-    //         this.exchanges[i].beforeTime = moment(exchange.opening_time, format);
-    //         this.exchanges[i].afterTime = moment(exchange.closing_time, format);
-    //         this.exchanges[i].beforeDiff = this.exchanges[i].beforeTime.diff(this.exchanges[i].timeobject);
-    //         this.exchanges[i].afterDiff = this.exchanges[i].afterTime.diff(this.exchanges[i].timeobject);
-    //         this.exchanges[i].beforeDur = moment.duration(this.exchanges[i].beforeDiff);
-    //         this.exchanges[i].afterDur = moment.duration(this.exchanges[i].afterDiff);
-    //         this.exchanges[i].afterRemaining = Math.floor(this.exchanges[i].afterDur.asHours()) + moment.utc(this.exchanges[i].afterDur.asMilliseconds()).format(":mm:ss");
-    //         this.exchanges[i].beforeRemaining = Math.floor(this.exchanges[i].afterDur.asHours()) + moment.utc(this.exchanges[i].beforeDur.asMilliseconds()).format(":mm:ss");
-    //         if (exchange.open_status == true) {
-    //             this.exchanges[i].remaining = this.exchanges[i].afterRemaining;
-    //         } else {
-    //             if (this.exchanges[i].beforeDiff > 0) {
-    //                 this.exchanges[i].remaining = this.exchanges[i].beforeRemaining;
-    //             } else {
-    //                 this.exchanges[i].beforeTime = this.exchanges[i].beforeTime.add(1, 'd');
-    //                 this.exchanges[i].beforeDiff = this.exchanges[i].beforeTime.diff(this.exchanges[i].timeobject);
-    //                 this.exchanges[i].beforeDur = moment.duration(this.exchanges[i].beforeDiff);
-    //                 this.exchanges[i].beforeRemaining = Math.floor(this.exchanges[i].beforeDur.asHours()) + moment.utc(this.exchanges[i].beforeDur.asMilliseconds()).format(":mm:ss");
-    //                 this.exchanges[i].remaining = this.exchanges[i].beforeRemaining;
-    //             }
-    //         }
-    //     }
-    // }
 
     openRemaining(i): any {
         return Math.floor(this.timeValues(i).afterDur.asHours()) + moment.utc(this.timeValues(i).afterDur.asMilliseconds()).format(":mm:ss");
@@ -137,7 +107,7 @@ export class ClockService {
         return {exchangeTime: exchangeTime, afterDur: afterDur, beforeTime, beforeDur, beforeDiff: beforeDiff};
     }
 
-    exchangeRemaining2(i): any {
+    exchangeRemaining(i): any {
         if (this.exchanges[i].open_status == true) {
             return this.openRemaining(i);
         } else {
@@ -155,13 +125,6 @@ export class ClockService {
         }
     }
 
-    // thoughtFunction(i): any {
-    //     if ("it is after closing time" && "it is the day before the first weekend day") {
-    //         exchangeRemaining(i, beforeTime = beforeTime.add(2, 'd'));
-    //     } else if ("")
-    // }
-
-// Changes!
     checkTomorrowWeekend(i): boolean {
         var daysInWeek, todayIndex, tomorrow, exchangeDay
 
@@ -182,19 +145,6 @@ export class ClockService {
     checkTodayWeekend(i): boolean {
         if (this.exchanges[i].weekend.includes(this.exchanges[i].day)) {
             return true;
-        }
-    }
-
-// End of Changes!
-    checkWeekend(i): any {
-        if (this.exchanges[i].weekend[0] == this.exchanges[i].day) {
-            this.exchanges[i].extra_days = 2;
-            return true;
-        } else if (this.exchanges[i].weekend[1] == this.exchanges[i].day) {
-            this.exchanges[i].extra_days = 1;
-            return true;
-        } else {
-            this.exchanges[i].extra_days = 0;
         }
     }
 
