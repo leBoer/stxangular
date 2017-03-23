@@ -12,4 +12,13 @@ export class Exchange {
   remaining: string;
   weekend: any;
   extra_days: number;
+  beforeTime: any;
+  afterTime: any;
+  beforeDiff: any;
+  afterDiff: any;
+  beforeDur: any;
+  afterDur: any;
+  beforeRemaining: any;
+  afterRemaining: any;
+  timeobject: any;
 }
