@@ -1,12 +1,24 @@
 h1 {
-  font-size: 1.2em;
-  color: #999;
+  font-size: 2em;
+  color: #A9A9A9;
   margin-bottom: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  vertical-align: middle;
 }
 h2 {
   font-size: 2em;
   margin-top: 0;
   padding-top: 0;
+}
+
+.title-div {
+  background-color: #CAEBF2;
+  height: 3em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
 }
 nav a {
   padding: 5px 10px;

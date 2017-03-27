@@ -16,6 +16,7 @@ import { ClockService } from './clock.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { TabsetComponent } from './tabset/tabset.component';
+import { CompactComponent } from './compact/compact.component';
 // import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TabsetComponent } from './tabset/tabset.component';
     DashboardComponent,
     ExchangeDetailComponent,
     ExchangesComponent,
-    TabsetComponent
+    TabsetComponent,
+    CompactComponent
     // NavbarComponent
   ],
   imports: [

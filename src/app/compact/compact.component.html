@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row">
+    <a *ngFor="let exchange of exchanges" class="col-12">
+      <div class="exchange" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
+        <span>{{exchange.ticker}} | {{exchange.open_status}} | {{exchange.remaining}}</span>
+      </div>
+    </a>
+  </div>
+</div>
