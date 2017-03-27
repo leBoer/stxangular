@@ -17,6 +17,7 @@ import { ClockService } from './clock.service';
 import { AppRoutingModule } from './app-routing.module';
 import { TabsetComponent } from './tabset/tabset.component';
 import { CompactComponent } from './compact/compact.component';
+import { SortPipe } from './sort.pipe';
 // import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CompactComponent } from './compact/compact.component';
     ExchangeDetailComponent,
     ExchangesComponent,
     TabsetComponent,
-    CompactComponent
+    CompactComponent,
+    SortPipe
     // NavbarComponent
   ],
   imports: [
