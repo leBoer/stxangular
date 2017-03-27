@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
 import { AlertModule } from 'ng2-bootstrap';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
 import { ExchangeDetailComponent } from './exchange-detail.component';
@@ -13,19 +15,24 @@ import { ExchangeService } from './exchange.service';
 import { ClockService } from './clock.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { TabsetComponent } from './tabset/tabset.component';
+// import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     ExchangeDetailComponent,
-    ExchangesComponent
+    ExchangesComponent,
+    TabsetComponent
+    // NavbarComponent
   ],
   imports: [
     AlertModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgbModule.forRoot(),
     AppRoutingModule,
     MomentModule
   ],

@@ -1,8 +1,8 @@
-<h3>Top Exchanges</h3>
-<h4 class="utcClock">{{ myDate | amUtc | amDateFormat: 'ddd Do HH:mm:ss' }}</h4>
-<div class="container">
+<!--<h3>Top Exchanges</h3>
+<h4 class="utcClock">{{ myDate | amUtc | amDateFormat: 'ddd Do HH:mm:ss' }}</h4>-->
+<div class="container-fluid">
   <div class="row">
-  <a *ngFor="let exchange of exchanges" [routerLink]="['/detail', exchange.id]" class="col-sm-8 col-md-6 col-lg-3">
+  <a *ngFor="let exchange of exchanges" [routerLink]="['/detail', exchange.id]" class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
     <div class="exchange" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
       <div class="exchange-block">
         <div class="time-block">
