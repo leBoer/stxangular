@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.exchangeService.getExchanges()
       .then(exchanges => this.exchanges = exchanges);
-      // .then(exchanges => this.clockService.generateWeekend(this.exchanges));
 
     this.clockService.utcTime(this.exchanges);
     setInterval(() => {

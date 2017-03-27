@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment';
+import { AlertModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     ExchangesComponent
   ],
   imports: [
+    AlertModule.forRoot(),
     BrowserModule,
     FormsModule,
     HttpModule,
