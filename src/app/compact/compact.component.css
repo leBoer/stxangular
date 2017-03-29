@@ -1,0 +1,29 @@
+p {
+    font-size: 0.8em;
+    vertical-align: middle;
+    display: inline-block;
+}
+.name-container {
+    height: 2em;
+    line-height: 1.9em;
+}
+.status-container {
+    height: 2em;
+    line-height: 1.9em;
+}
+.remaining-container {
+    height: 2em;
+    line-height: 1.9em;
+}
+.status-open {
+    background-color: #CAEBF2;
+}
+.status-closed {
+    background-color: #FF3B3F;
+}
+.status-closed .status-text {
+    color: #EFEFEF;
+}
+.status-open .status-text{
+    color: #A9A9A9;
+}
