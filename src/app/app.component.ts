@@ -6,8 +6,11 @@ import { Observable } from 'rxjs/Rx';
   selector: 'stx-clock',
   styleUrls: [ './app.component.css' ],
   template: `
-    <div class="title-div">
-      <h1 class="align-middle">{{ title }} </h1>
+    <div class="row">
+      <div class="col-12 title-div text-left">
+        <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
+        <h1>    {{ title }}</h1>
+      </div>
     </div>
     <app-tabset></app-tabset>
     <router-outlet></router-outlet>

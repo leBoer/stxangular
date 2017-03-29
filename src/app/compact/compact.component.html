@@ -2,7 +2,19 @@
   <div class="row">
     <a *ngFor="let exchange of exchanges | sortBy : 'name'" class="col-12">
       <div class="exchange" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
-        <span>{{exchange.ticker}} | {{exchange.open_status}} | {{exchange.remaining}}</span>
+        <!--<span>{{exchange.ticker}} | {{exchange.open_status}} | {{exchange.remaining}}</span>-->
+        <div class="row">
+          <div class="col-7 text-left name-container">
+            <p class="name-text">{{exchange.name}}</p>
+          </div>
+          <div class="col-2 text-center status-container" [ngClass]="{'status-open': exchange.open_status, 'status-closed': !exchange.open_status}">
+            <p class="status-text" *ngIf="exchange.open_status == true">Open</p>
+            <p class="status-text" *ngIf="exchange.open_status == false">Closed</p>
+          </div>
+          <div class="col-3 text-right remaining-container">
+            <p class="remaining-text">{{exchange.remaining}}</p>
+          </div>
+        </div>
       </div>
     </a>
   </div>
