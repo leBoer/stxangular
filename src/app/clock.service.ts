@@ -23,6 +23,7 @@ export class ClockService {
         for (var i = 0; i < exchanges.length; i++) {
             this.exchanges[i].remaining = this.exchangeRemaining(i);
         }
+     
         return [this.myDate = new Date, this.exchanges];
     }
 

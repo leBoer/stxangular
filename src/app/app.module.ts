@@ -6,6 +6,8 @@ import { MomentModule } from 'angular2-moment';
 import { AlertModule } from 'ng2-bootstrap';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate';
+
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
@@ -36,11 +38,12 @@ import { SortPipe } from './sort.pipe';
     BrowserModule,
     FormsModule,
     HttpModule,
+    LoadingAnimateModule.forRoot(),
     NgbModule.forRoot(),
     AppRoutingModule,
     MomentModule
   ],
-  providers: [ExchangeService, ClockService],
+  providers: [ExchangeService, ClockService, LoadingAnimateService],
   bootstrap: [AppComponent]
 })
 
