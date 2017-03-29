@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tabset',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabset.component.css']
 })
 export class TabsetComponent implements OnInit {
+  location: string;
 
-  constructor() { }
+  constructor(location: Location) {
+    this.location = location.path();
+  }
 
   ngOnInit() {
   }
-
 }
