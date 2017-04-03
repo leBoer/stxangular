@@ -19,9 +19,9 @@ export class ClockService {
 
     utcTime(exchanges): any {
         this.exchangeTimes(exchanges);
-        this.exchangeOpenStatus(exchanges);
         for (var i = 0; i < exchanges.length; i++) {
             this.weekBuilder(i);
+            this.exchangeOpenStatus(i);
             this.exchanges[i].remaining = this.exchangeRemaining(i);
         }
      
@@ -41,18 +41,16 @@ export class ClockService {
         }
     }
 
-    exchangeOpenStatus(exchanges): any {
+    exchangeOpenStatus(i): any {
         var format = 'hh:mm:ss';
-        for (var i = 0; i < exchanges.length; i++) {
-            var exchange = exchanges[i]; // Sets a variable for easier access to individual exchanges
-            var time = moment(exchange.time, format),
-                beforeTime = moment(exchange.opening_time, format),
-                afterTime = moment(exchange.closing_time, format);
-            if (!this.checkTodayWeekend(i) && time.isBetween(beforeTime, afterTime)) {
-                exchange.open_status = true;
-            } else {
-                exchange.open_status = false;
-            }
+        var exchange = this.exchanges[i]; // Sets a variable for easier access to individual exchanges
+        var time = moment(exchange.time, format),
+            beforeTime = moment(exchange.opening_time, format),
+            afterTime = moment(exchange.closing_time, format);
+        if ((this.exchanges[i].week[0] || this.exchanges[i].week.length == 0) && time.isBetween(beforeTime, afterTime)) {
+            exchange.open_status = true;
+        } else {
+            exchange.open_status = false;
         }
     }
 
@@ -110,45 +108,51 @@ export class ClockService {
     }
 
     exchangeRemaining(i): any {
+        var w = this.exchanges[i].week; // For easier access
         if (this.exchanges[i].open_status == true) {
             return this.openRemaining(i);
         } else {
-            if (this.morningClosed(i) && !this.checkTodayWeekend(i)) {
+            if (this.morningClosed(i) && w.length == 0) {
+                // console.log(this.exchanges[i].name);
                 return this.morningRemaining(i);
-            } else if (this.eveningClosed(i) && !this.checkTodayWeekend(i) && !this.checkTomorrowWeekend(i)) {
+            } else if (this.eveningClosed(i) && this.exchanges[i].week[0] && this.exchanges[i].week[1] && this.exchanges[i].week.length == 2) {
+                // console.log(this.exchanges[i].name);
                 return this.eveningRemaining(i);
-            } else if (this.eveningClosed(i) && !this.checkTodayWeekend(i) && this.checkTomorrowWeekend(i)) {
-                return this.weekendRemaining(i, 3);
-            } else if (this.checkTodayWeekend(i) && this.checkTomorrowWeekend(i)) {
-                return this.weekendRemaining(i, 2);
-            } else if (this.checkTodayWeekend(i) && !this.checkTomorrowWeekend(i)) {
+            } else if (this.eveningClosed(i) && this.exchanges[i].week[0] && !this.exchanges[i].week[1]) {
+                // console.log(this.exchanges[i].name);
+                return this.weekendRemaining(i, this.exchanges[i].week.length);
+            } else if (!this.exchanges[i].week[0] && !this.exchanges[i].week[1]) {
+                // console.log(this.exchanges[i].name);
+                return this.weekendRemaining(i, this.exchanges[i].week.length);
+            } else if (!this.exchanges[i].week[0] && this.exchanges[i].week.length == 1) {
+                // console.log(this.exchanges[i].name);
                 return this.eveningRemaining(i);
             }
         }
     }
 
-    checkTomorrowWeekend(i): boolean {
-        var daysInWeek, todayIndex, tomorrow, exchangeDay
+    // checkTomorrowWeekend(i): boolean {
+    //     var daysInWeek, todayIndex, tomorrow, exchangeDay
 
-        daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        exchangeDay = this.exchanges[i].day
-        function isSameDay(element, index, array) { // Locates the index of today
-            return element == exchangeDay; 
-        }
+    //     daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    //     exchangeDay = this.exchanges[i].day
+    //     function isSameDay(element, index, array) { // Locates the index of today
+    //         return element == exchangeDay; 
+    //     }
 
-        todayIndex = daysInWeek.findIndex(isSameDay);
-        tomorrow = daysInWeek[todayIndex + 1];
+    //     todayIndex = daysInWeek.findIndex(isSameDay);
+    //     tomorrow = daysInWeek[todayIndex + 1];
 
-        if (this.exchanges[i].weekend.includes(tomorrow)) {
-            return true;
-        }
-    }
+    //     if (this.exchanges[i].weekend.includes(tomorrow)) {
+    //         return true;
+    //     }
+    // }
 
-    checkTodayWeekend(i): boolean {
-        if (this.exchanges[i].weekend.includes(this.exchanges[i].day)) {
-            return true;
-        }
-    }
+    // checkTodayWeekend(i): boolean {
+    //     if (this.exchanges[i].weekend.includes(this.exchanges[i].day)) {
+    //         return true;
+    //     }
+    // }
 
     // Checks if a given day is a holiday h = 0 means today, h = 1 means tomorrow
     checkHoliday(i, h): boolean {
