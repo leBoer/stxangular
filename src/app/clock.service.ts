@@ -21,6 +21,7 @@ export class ClockService {
         this.exchangeTimes(exchanges);
         this.exchangeOpenStatus(exchanges);
         for (var i = 0; i < exchanges.length; i++) {
+            this.weekBuilder(i);
             this.exchanges[i].remaining = this.exchangeRemaining(i);
         }
      
@@ -149,11 +150,37 @@ export class ClockService {
         }
     }
 
-    testingfunction(): void {
-        for (var i = 0; i < this.exchanges.length; i++) {
-           console.log(this.exchanges[5].name);
-           console.log(this.checkTomorrowWeekend(5));
-           console.log(this.weekendRemaining(5, 2));
+    // Checks if a given day is a holiday h = 0 means today, h = 1 means tomorrow
+    checkHoliday(i, h): boolean {
+        var currentTimeObject = this.nonUTCTime(this.exchanges[i].timezone).add(h, 'day');
+        var formattedCurrentTime = currentTimeObject.format('MMMM DD, YYYY');
+        var holidayMoment = moment(this.exchanges[i].holidays[h], 'MMMM DD, YYYY');
+        var formattedHoliday = holidayMoment.format('MMMM DD, YYYY');
+        if (formattedCurrentTime == formattedHoliday ||
+            this.exchanges[i].holidays.includes(formattedCurrentTime) ||
+            this.exchanges[i].weekend.includes(currentTimeObject.format('dddd'))) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    // Builds an array for the upcoming non-trading days
+    // False = Closed, True = Open
+    weekBuilder(i): void {
+        this.exchanges[i].week = [];
+        for (var h = 0; h < this.exchanges[i].holidays.length + 14; h++) {
+            if (this.checkHoliday(i, h)) {
+                this.exchanges[i].week.push(false);
+            } else {
+                return;
+            }
+        }
+    }
+
+    testingfunction(): any {
+        // this.weekBuilder(0);
+        console.log(this.exchanges[0].week);
+        console.log(this.exchanges);
     }
 }

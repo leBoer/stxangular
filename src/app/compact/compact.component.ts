@@ -52,4 +52,8 @@ export class CompactComponent implements OnInit, AfterViewInit, DoCheck {
       that._loadingSvc.setValue(false);
     }, 3000);
   }
+
+  buttonTest(): any {
+    this.clockService.testingfunction();
+  }
 }

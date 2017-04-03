@@ -21,4 +21,6 @@ export class Exchange {
   beforeRemaining: any;
   afterRemaining: any;
   timeobject: any;
+  week: any;
+  holidays: any;
 }
