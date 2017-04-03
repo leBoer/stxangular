@@ -112,19 +112,19 @@ export class ClockService {
         if (this.exchanges[i].open_status == true) {
             return this.openRemaining(i);
         } else {
-            if (this.morningClosed(i) && w.length == 0) {
+            if (this.morningClosed(i) && w.length == 0) { // Open today, but before opening time
                 // console.log(this.exchanges[i].name);
                 return this.morningRemaining(i);
-            } else if (this.eveningClosed(i) && this.exchanges[i].week[0] && this.exchanges[i].week[1] && this.exchanges[i].week.length == 2) {
-                // console.log(this.exchanges[i].name);
+            } else if (this.eveningClosed(i) && w.length == 1) { // After closing time, but open today and tomorrow
+                console.log(this.exchanges[i].name);
                 return this.eveningRemaining(i);
-            } else if (this.eveningClosed(i) && this.exchanges[i].week[0] && !this.exchanges[i].week[1]) {
+            } else if (this.eveningClosed(i) && w[0] && !w[1] && w.length >=2) { // After closing, open today, but not tomorrow
                 // console.log(this.exchanges[i].name);
-                return this.weekendRemaining(i, this.exchanges[i].week.length);
-            } else if (!this.exchanges[i].week[0] && !this.exchanges[i].week[1]) {
+                return this.weekendRemaining(i, w.length);
+            } else if (!w[0] && !w[1] && w.length >=2) { // today is closed and tomorrow is also closed...
                 // console.log(this.exchanges[i].name);
-                return this.weekendRemaining(i, this.exchanges[i].week.length);
-            } else if (!this.exchanges[i].week[0] && this.exchanges[i].week.length == 1) {
+                return this.weekendRemaining(i, w.length);
+            } else if (!w[0] && w.length == 1) { // closed today, open tomorrow
                 // console.log(this.exchanges[i].name);
                 return this.eveningRemaining(i);
             }
@@ -176,6 +176,8 @@ export class ClockService {
         for (var h = 0; h < this.exchanges[i].holidays.length + 14; h++) {
             if (this.checkHoliday(i, h)) {
                 this.exchanges[i].week.push(false);
+            } else if (this.eveningClosed(i) && h == 0) {
+                this.exchanges[i].week.push(true);
             } else {
                 return;
             }
@@ -186,5 +188,8 @@ export class ClockService {
         // this.weekBuilder(0);
         console.log(this.exchanges[0].week);
         console.log(this.exchanges);
+        for (var i = 0; i < this.exchanges.length; i++) {
+            console.log(this.exchanges[i].week);
+        }
     }
 }
