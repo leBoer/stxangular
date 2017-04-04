@@ -19,3 +19,9 @@ body, input[text], button {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+.index-container {
+  /*border-style: solid;*/
+}
+.index-row {
+  border-style: solid;
+}
