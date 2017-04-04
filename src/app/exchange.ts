@@ -8,10 +8,8 @@ export class Exchange {
   opening_time: number;
   closing_time: number;
   open_status: boolean;
-  // open_monday: boolean;
   remaining: string;
   weekend: any;
-  // extra_days: number;
   beforeTime: any;
   afterTime: any;
   beforeDiff: any;
@@ -20,7 +18,6 @@ export class Exchange {
   afterDur: any;
   beforeRemaining: any;
   afterRemaining: any;
-  // timeobject: any;
   week: any;
   holidays: any;
 }

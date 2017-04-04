@@ -21,6 +21,11 @@ li {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 0.8em;
 }
+.row {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1600px;
+}
 
 .exchange {
   margin-bottom: 2em;

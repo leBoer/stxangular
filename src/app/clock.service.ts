@@ -116,7 +116,7 @@ export class ClockService {
                 // console.log(this.exchanges[i].name);
                 return this.morningRemaining(i);
             } else if (this.eveningClosed(i) && w.length == 1) { // After closing time, but open today and tomorrow
-                console.log(this.exchanges[i].name);
+                // console.log(this.exchanges[i].name);
                 return this.eveningRemaining(i);
             } else if (this.eveningClosed(i) && w[0] && !w[1] && w.length >=2) { // After closing, open today, but not tomorrow
                 // console.log(this.exchanges[i].name);
@@ -130,29 +130,6 @@ export class ClockService {
             }
         }
     }
-
-    // checkTomorrowWeekend(i): boolean {
-    //     var daysInWeek, todayIndex, tomorrow, exchangeDay
-
-    //     daysInWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    //     exchangeDay = this.exchanges[i].day
-    //     function isSameDay(element, index, array) { // Locates the index of today
-    //         return element == exchangeDay; 
-    //     }
-
-    //     todayIndex = daysInWeek.findIndex(isSameDay);
-    //     tomorrow = daysInWeek[todayIndex + 1];
-
-    //     if (this.exchanges[i].weekend.includes(tomorrow)) {
-    //         return true;
-    //     }
-    // }
-
-    // checkTodayWeekend(i): boolean {
-    //     if (this.exchanges[i].weekend.includes(this.exchanges[i].day)) {
-    //         return true;
-    //     }
-    // }
 
     // Checks if a given day is a holiday h = 0 means today, h = 1 means tomorrow
     checkHoliday(i, h): boolean {

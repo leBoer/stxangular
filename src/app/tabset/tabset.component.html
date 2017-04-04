@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <div class="row">
+<div class="row">
+  <div class="col-12">
     <ngb-tabset activeId={{location}}>
       <h1>title</h1>
       <ngb-tab id="/dashboard">
@@ -20,14 +20,14 @@
         </template>
       </ngb-tab>
       
-      <ngb-tab id="/contact" title="Contact us" [disabled]=true>
+      <!--<ngb-tab id="/contact" title="Contact us" [disabled]=true>
         <template ngbTabTitle>
-          <!--<a routerLink="/contact" routerLinkActive="active">Contact us</a>-->
+          <a routerLink="/contact" routerLinkActive="active">Contact us</a>
         </template>
         <template ngbTabContent>
 
         </template>
-      </ngb-tab>
+      </ngb-tab>-->
 
     </ngb-tabset>
   </div>

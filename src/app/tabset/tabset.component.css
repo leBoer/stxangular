@@ -1,7 +1,10 @@
 a {
     color: inherit;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
-.container-fluid {
-    margin-bottom: 1em;
+.row {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2em;
+    max-width: 1600px;
 }
