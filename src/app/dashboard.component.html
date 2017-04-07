@@ -19,9 +19,9 @@
         </div>
         <div class="status-block" [ngClass]="{'status-open': exchange.open_status, 'status-closed': !exchange.open_status}">
           <ul>
+            <li class="status-text" *ngIf="exchange.open_status == true">Open</li>
+            <li class="status-text" *ngIf="exchange.open_status == false">Closed</li>
             <li class="status-text">Current time: {{exchange.time}}</li>
-            <li class="status-text" *ngIf="exchange.open_status == true">Status: Open</li>
-            <li class="status-text" *ngIf="exchange.open_status == false">Status: Closed</li>
           </ul>
         </div>
       </div>

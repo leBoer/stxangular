@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TabsetComponent } from './tabset/tabset.component';
 import { CompactComponent } from './compact/compact.component';
 import { SortPipe } from './sort.pipe';
+import { NavbarComponent } from './navbar/navbar.component';
 // import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SortPipe } from './sort.pipe';
     ExchangesComponent,
     TabsetComponent,
     CompactComponent,
-    SortPipe
+    SortPipe,
+    NavbarComponent
     // NavbarComponent
   ],
   imports: [

@@ -81,11 +81,11 @@ li {
 }
 
 .status-open .status-text {
-  color: #A9A9A9;
+  color: #76c9dd;
 }
 
 .status-closed .status-text {
-  color: #EFEFEF;
+  color: #FF3B3F;
 }
 
 .countdown-open {
@@ -97,9 +97,9 @@ li {
 }
 
 .status-open {
-  background-color: #CAEBF2;
+  background-color: #EFEFEF;
 }
 
 .status-closed {
-  background-color: #FF3B3F;
+  background-color: #EFEFEF;
 }
