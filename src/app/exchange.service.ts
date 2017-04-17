@@ -8,8 +8,9 @@ import { EXCHANGES } from './mock-exchanges';
 
 @Injectable()
 export class ExchangeService {
-  private exchangesUrl = 'http://127.0.0.1:8000/stxclock/api/exchanges/?format=json';
+  // private exchangesUrl = 'http://127.0.0.1:8000/stxclock/api/exchanges/?format=json';
   // private exchangesUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private exchangesUrl = 'http://46.101.235.207/stxclock/api/exchanges.json';
 
   constructor(private http: Http) {}
 
