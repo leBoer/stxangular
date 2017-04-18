@@ -1,6 +1,8 @@
 <loading-animate></loading-animate>
-  <div class="row full-width" *ngFor="let exchange of exchanges | sortBy : 'name'" [routerLink]="['/detail', exchange.id]" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
-      <div class="col-7 name-block">
+<div class="row">
+  <div class="col-12 col-md-3 full-width" *ngFor="let exchange of exchanges | sortBy : 'name'" [routerLink]="['/detail', exchange.id]" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
+    <div class="row">
+      <div class="col-7 col-md-12 name-block">
         <p class="name">{{exchange.name}}</p>
         <p class="status-open" *ngIf="exchange.open_status == true">
           <i class="fa fa-circle-o" aria-hidden="true"></i>
@@ -12,8 +14,10 @@
         </p>
         <p class="hidden-xs">Current time: {{exchange.time}}</p>
       </div>
-      <div class="col-5 countdown-block">
+      <div class="col-5 col-md-12 countdown-block">
         <p class="countdown">{{exchange.remaining}}</p>
       </div>
+    </div>
   </div>
+</div>
 <!--<button (click)="buttonTest()">TestButton</button>-->
