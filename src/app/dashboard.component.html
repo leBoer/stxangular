@@ -1,31 +1,19 @@
-<!--<h3>Top Exchanges</h3>
-<h4 class="utcClock">{{ myDate | amUtc | amDateFormat: 'ddd Do HH:mm:ss' }}</h4>-->
 <loading-animate></loading-animate>
-<div class="row">
-  <a *ngFor="let exchange of exchanges | sortBy : 'name'" [routerLink]="['/detail', exchange.id]" class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
-    <div class="exchange" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
-      <div class="exchange-block">
-        <div class="time-block">
-          <div class="exchange-name">
-          <h5 class="card-title">{{exchange.name}}</h5>
-          </div>
-          <div class="opening-in">
-            <p class="time-text" *ngIf="exchange.open_status == false">Opening in:</p>
-            <p class="time-text" *ngIf="exchange.open_status == true">Closing in:</p>
-          </div>
-          <div class="countdown-div">
-            <p class="countdown" [ngClass]="{'countdown-open': exchange.open_status, 'countdown-closed': !exchange.open_status}">{{exchange.remaining}}</p>
-          </div>
-        </div>
-        <div class="status-block" [ngClass]="{'status-open': exchange.open_status, 'status-closed': !exchange.open_status}">
-          <ul>
-            <li class="status-text" *ngIf="exchange.open_status == true">Open</li>
-            <li class="status-text" *ngIf="exchange.open_status == false">Closed</li>
-            <li class="status-text">Current time: {{exchange.time}}</li>
-          </ul>
-        </div>
+  <div class="row full-width" *ngFor="let exchange of exchanges | sortBy : 'name'" [routerLink]="['/detail', exchange.id]" [ngClass]="{'module-open': exchange.open_status, 'module-closed': !exchange.open_status}">
+      <div class="col-7 name-block">
+        <p class="name">{{exchange.name}}</p>
+        <p class="status-open" *ngIf="exchange.open_status == true">
+          <i class="fa fa-circle-o" aria-hidden="true"></i>
+          Open and closing in...
+        </p>
+        <p class="status-closed" *ngIf="exchange.open_status == false">
+          <i class="fa fa-circle-o" aria-hidden="true"></i>
+          Closed and opening in...
+        </p>
+        <p class="hidden-xs">Current time: {{exchange.time}}</p>
       </div>
-    </div>
-  </a>
-</div>
+      <div class="col-5 countdown-block">
+        <p class="countdown">{{exchange.remaining}}</p>
+      </div>
+  </div>
 <!--<button (click)="buttonTest()">TestButton</button>-->
