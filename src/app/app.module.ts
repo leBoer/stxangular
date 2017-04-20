@@ -10,15 +10,12 @@ import { LoadingAnimateModule, LoadingAnimateService } from 'ng2-loading-animate
 
 
 import { AppComponent } from './app.component';
+import { ContactComponent } from './contact/contact.component';
 import { DashboardComponent } from './dashboard.component';
-import { ExchangeDetailComponent } from './exchange-detail.component';
-import { ExchangesComponent } from './exchanges.component';
 import { ExchangeService } from './exchange.service';
 import { ClockService } from './clock.service';
 
 import { AppRoutingModule } from './app-routing.module';
-import { TabsetComponent } from './tabset/tabset.component';
-import { CompactComponent } from './compact/compact.component';
 import { SortPipe } from './sort.pipe';
 import { NavbarComponent } from './navbar/navbar.component';
 // import { NavbarComponent } from './navbar/navbar.component';
@@ -27,10 +24,11 @@ import { NavbarComponent } from './navbar/navbar.component';
   declarations: [
     AppComponent,
     DashboardComponent,
-    ExchangeDetailComponent,
-    ExchangesComponent,
-    TabsetComponent,
-    CompactComponent,
+    // ExchangeDetailComponent,
+    // ExchangesComponent,
+    // TabsetComponent,
+    // CompactComponent,
+    ContactComponent,
     SortPipe,
     NavbarComponent
     // NavbarComponent
