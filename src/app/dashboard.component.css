@@ -3,47 +3,19 @@ p {
 }
 .row {
   max-width: 1600px;
-  /*height: 5em;
-  border-bottom: 1px solid;
-  margin-left: -8px;*/
-  /*border-style: solid;*/
   align-content: middle;
 }
-.col-12 {
-  height: 5em;
-  border-bottom: 1px solid;
-  margin-left: 8px;
-  padding-left: 0;
-  /*border-style: solid;*/
-}
 .name {
-  font-size: 1.3em;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
 }
-.name-block {
-  font-size: 0.7em;
-  top: 50%;
-  height: 4em;
-  top: 1.5em;
-  line-height: 0.4em;
-}
-.countdown-block {
-  font-size: 2.5em;
-  height: 100%;
-  padding: 0;
-}
 .countdown {
-  float: right;
-  position: relative;
-  top: 0.2em;
-  padding-right: 0.3em;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
 }
-.col-md-12 .name{
-  font-size: 2em;
-  text-align: center;
+.status, .current-time {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 .status-open .fa {
   color: #76c9dd;
@@ -51,8 +23,84 @@ p {
 .status-closed .fa {
   color: #FF3B3F;
 }
-@media screen and (max-width: 350px) {
+/*Phones up to, but not including iPad*/
+@media screen and (max-width: 767px) {
   .name {
     font-size: 1em;
+  }
+  .full-width {
+    height: 5em;
+    border-bottom: 1px solid;
+    margin-left: 8px;
+    padding-left: 0;
+  }
+  .countdown-block {
+    font-size: 2.5em;
+    height: 100%;
+    padding: 0;
+  }
+  .countdown {
+    float: right;
+    position: relative;
+    top: 0.25em;
+    padding-right: 0.3em;
+  }
+  .name-block {
+    top: 50%;
+    height: 4em;
+    top: 1.3em;
+    line-height: 0.0em;
+  }
+  .status {
+    font-size: 0.8em;
+  }
+  .current-time {
+    font-size: 0.8em;
+  }
+}
+/*For the smallest phones*/
+@media screen and (max-width: 350px) {
+  .name {
+    font-size: 0.75em;
+  }
+}
+/*Ipad and up*/
+@media screen and (min-width:768px) {
+  .name {
+    font-size: 1.7em;
+    text-align: center;
+  }
+  .full-width {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #A9A9A9;
+    border-right: 1px solid #A9A9A9;
+  }
+  .full-width:nth-last-of-type(-n+3) {
+    border-bottom: none;
+  }
+  .full-width:nth-of-type(3n+3) {
+    border-right: none;
+  }
+  .name-block {
+    height: 150px;
+    padding-top: 1em;
+  }
+  .status {
+    text-align: center;
+  }
+  .countdown-block {
+    font-size: 3em;
+  }
+  .countdown {
+    text-align: center;
+  }
+  .current-time{
+    display: none;
+  }
+  .current-time-md{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: center;
   }
 }
